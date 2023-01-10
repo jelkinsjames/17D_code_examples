@@ -6,9 +6,9 @@ There are examples of things I have written in Java, Python, SystemVerilog, Goog
 
 There are two examples for my Python code:
 
-242L2 - This lab deals with convolution: how it works practically and conceptually.
+242L2 - This lab deals with convolution: how it works practically and conceptually. Completed as part of a group.
 
-242L4 - This lab deals with audio filtering, demonstrating that my group fully grasped how to code for digital signal processing in python.
+242L4 - This lab deals with audio filtering, demonstrating that my group fully grasped how to code for digital signal processing in python. Completed as part of a group.
 
 #Java
 
@@ -18,7 +18,21 @@ Example 2 - A game of 20 Questions with a computer. Add any question/answer tree
 
 #SytemVerilog
 
+Example 1
 
+Implements a 8x32 Ram which can be written to and read synchronusly on a FPGA HEX display.
+
+Example 2
+
+Same as above, except that it will continuously scroll through the memory depending on how fast the clock divider is set. Can change RAM anytime during memory scroll.
+
+Example 3
+
+Implements a oneCounter that counts the number of ones input on the switch array at the bottom of the FPGA and displays it on the FPGA HEX displays.
+
+Example 4
+
+Same as above but it counts the number of ones stored at an address in a 8x32 RAM.
 
 #Google Apps Script
 
