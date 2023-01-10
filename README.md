@@ -4,6 +4,12 @@ There are examples of things I have written in Java, Python, SystemVerilog, Goog
 
 #Python
 
+There are two examples for my Python code:
+
+242L2 - This lab deals with convolution: how it works practically and conceptually.
+
+242L4 - This lab deals with audio filtering, demonstrating that my group fully grasped how to code for digital signal processing in python.
+
 #Java
 
 #SytemVerilog
