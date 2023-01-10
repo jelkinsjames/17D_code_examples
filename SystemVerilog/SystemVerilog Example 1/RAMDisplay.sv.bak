@@ -1,0 +1,104 @@
+// Julian James
+// 10/24/2022
+// E E 371
+// Lab 2 Task 1
+
+// Displays the address, data being written to, and data being read off of a RAM.
+// Values for address, read and write data must be given to work. 32-bit address
+// data is displayed on two hexes, addr HEX1 and HEX2.
+// Supports up to 32 addresses.
+// INPUTS: 1-bit clk, 4-bit addr, dataWrite, dataRead
+// OUTPUTS: 7-bit hexadecimal addrHEX1, addrHEX2, writeHEX, readHEX.
+module RAMDisplay (clk, addr, dataToWrite, dataRead, 
+						 addrHEX1, addrHEX0, wrHEX, reHEX);
+	input clk;
+	input [4:0] addr;
+	input [3:0] dataToWrite, dataRead;
+	output [6:0] addrHEX1, addrHEX2, wrHEX, reHEX;
+	
+	// To display up to 32 addresses, addr is split into first and second
+	// HEXA bit.
+	
+	logic [3:0] addrBit1;
+	logic [3:0] addrBit0;
+	
+	assign addrBit1 = addr / 15;
+	assign addrBit0 = addr % 15;
+	
+	// First and second bits of address are split here.
+	
+	displayHexa displayAddr1 (.clk, .data(4'(addrBit1)), .HEX(addrHEX1));
+	
+	displayHexa displayAddr0 (.clk, .data(4'(addrBit0)), .HEX(addrHEX0));
+	
+	// Data that is read and written is sent to be displayed here.
+	
+	displayHexa displayWrite (.clk, .data(dataToWrite), .HEX(wrHEX));
+	
+	displayHexa displayRead (.clk, .data(dataRead), .HEX(reHEX));
+	
+endmodule
+
+// Tests to see if all of the given numbers are displayed correctly by RAMDisplay
+module RAMDisplay_testbench();
+	logic clk;
+	logic [4:0] addr;
+	logic [3:0] dataToWrite, dataRead;
+	logic [6:0] addrHEX1, addrHEX0, wrHEX, reHEX;
+	
+	RAMDisplay dut (.clk, .addr, .dataToWrite, .dataRead, 
+					    .addrHEX1, .addrHEX0, .wrHEX, .reHEX);
+	
+	// Sets up the clock for use in the simulation.
+	
+	parameter clock_period = 100;
+	initial 
+		begin
+			clk <= 0;
+			forever #(clock_period / 2) clk <= ~clk;
+		end
+	
+	//Used in for loops later.
+	
+	logic [3:0] i;
+	
+	//Tests all possible outputs of module.
+	initial 
+		begin
+			// Set all to 0
+			
+			addr <= 5'b0; dataToWrite = 4'b0; dataRead = 4'b0; @(posedge clk);
+			
+			// Increases address input up to 31.
+			
+			for (i = 5'b0; i < 10'd31; i++) 
+				begin
+					addr++; @(posedge clk);
+				end
+			addr <= 5'b0; @(posedge clk);
+			
+			// Increases dataToWrite up to 31.
+			
+			for (i = 4'b0; i < 4'b1111; i++) 
+				begin
+				  dataToWrite++; @(posedge clk);
+				end
+			dataWrite <= 4'b0; @(posedge clk);.
+				
+			// Increases dataRead up to 15.
+			
+			for (i = 4'b00; i < 4'b1111; i++) begin /
+				dataRead++; @(posedge clk);
+			end
+			dataRead <= 4'b00;	@(posedge clk);	
+
+			// Tests multiple different values displayed at the same time.
+		   // OUTPUTS: addrHEX1 = 7'b1111001, addrHEX0 = 00100101, dataWrite = 1111001, dataRead = 0011001
+			
+			addr <= 5'b11111; dataToWrite <= 4'b0001; dataRead <= 4'b1110; repeat(2) @(posedge clk);																								
+			
+			//Stops simulation.
+			
+			$stop;
+		end
+endmodule
