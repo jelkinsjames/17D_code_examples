@@ -12,7 +12,13 @@ There are two examples for my Python code:
 
 #Java
 
+Example 1 - My version of a Huffman Encoder/Decoder. This was the last project in my Computer Programming II class, and it demonstrates my knowledge of algorithms and functions to manipulate data.
+
+Example 2 - A game of 20 Questions with a computer. Add any question/answer tree into the questions.txt, and the program will automatically create a QuestionNode tree that stores all the data given at initialization as well as during the game. Able to take user input whenever it gets the question tree wrong so that it can grow the tree.
+
 #SytemVerilog
+
+
 
 #Google Apps Script
 
